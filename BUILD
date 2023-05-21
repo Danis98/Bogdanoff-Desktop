@@ -6,7 +6,11 @@ cc_binary(
         "bogdanoff.cpp"
     ],
     deps = [
-        "@dear_imgui//:dear_imgui"
+        "//chrono:timing",
+        "//http",
+        "//client:account",
+        "//gui",
+        "@dear_imgui//:dear_imgui",
     ],
     visibility = ["//visibility:public"]
 )
