@@ -18,9 +18,7 @@
 #endif
 
 #include "http/http_session.h"
-#include "client/client.h"
-#include "client/coinex_client.h"
-#include "client/etherscan_client.h"
+#include "client/client_factory.h"
 #include "chrono/timing.h"
 
 
@@ -98,16 +96,7 @@ int main(int, char**)
     std::vector<std::unique_ptr<Client>> clients;
     bool *client_open;
 
-    for(const auto& client_config : config["clients"])
-    {
-        if(client_config["enabled"].get<std::string>() == "false")
-            continue;
-        if(client_config["venue"] == "coinex")
-            clients.push_back(std::make_unique<CoinexClient>(client_config));
-        else if(client_config["venue"] == "etherscan")
-            clients.push_back(std::make_unique<EtherscanClient>(client_config));
-        else continue;
-    }
+    create_clients(config["clients"], clients);
 
     client_open = new bool[clients.size()];
     for(size_t i=0;i<clients.size();i++)

@@ -4,12 +4,12 @@
 #include <cstdint>
 #include <string>
 
-EtherscanClient::EtherscanClient(const json etherscan_json)
+EtherscanClient::EtherscanClient(const json& etherscan_json)
     : Client("Etherscan")
     , _session(std::string(ETHERSCAN_BASE_URL))
     , _api_token(etherscan_json["token"])
 {
-    for(const auto& it : etherscan_json["public_addresses"])
+    for(const auto& it : etherscan_json["addresses"])
     {
         _addresses.push_back(it.get<std::string>());
     }

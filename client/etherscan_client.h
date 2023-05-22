@@ -10,7 +10,7 @@ constexpr char ETHERSCAN_BASE_URL[] = "https://api.etherscan.io/api";
 class EtherscanClient : public Client
 {
 public:
-    EtherscanClient(const json etherscan_json);
+    EtherscanClient(const json& etherscan_json);
     
     bool load_balances() noexcept override { 
         if(!_balances)
