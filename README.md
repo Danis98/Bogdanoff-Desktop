@@ -49,7 +49,6 @@ The program expects a `settings.json` file, example below
 ### Components
 
 #### Price
-----
 Price components are an interface for querying a website/API about asset prices
 
 Supported prices:
@@ -58,7 +57,6 @@ Supported prices:
 |CoinGecko|CRYPTO|
 
 #### Client
------
 Clients look up balances and transactions for the specified accounts.
 Each site/API needs its own client usually
 
