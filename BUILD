@@ -9,6 +9,7 @@ cc_binary(
         "//chrono:timing",
         "//http",
         "//client:account",
+        "//price",
         "//gui",
         "@dear_imgui//:dear_imgui",
     ],

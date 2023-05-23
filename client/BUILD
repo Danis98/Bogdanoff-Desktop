@@ -19,6 +19,7 @@ cc_library(
         "//crypto:md5",
         "//http",
         "//json",
+        "//price",
     ],
     visibility = ["//visibility:public"]
 )

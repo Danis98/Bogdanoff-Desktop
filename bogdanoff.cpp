@@ -14,6 +14,7 @@
 
 #include "http/http_session.h"
 #include "client/client_factory.h"
+#include "price/price_factory.h"
 #include "chrono/timing.h"
 
 
@@ -88,11 +89,15 @@ int main(int, char**)
     std::ifstream config_fstream("settings.json");
     const json config = json::parse(config_fstream);
 
+    // Initialize prices
+    std::vector<std::unique_ptr<Price>> prices;
+    create_prices(config["prices"], prices);
+
+    // Initialize clients
     std::vector<std::unique_ptr<Client>> clients;
+    create_clients(config["clients"], clients, prices);
+
     bool *client_open;
-
-    create_clients(config["clients"], clients);
-
     client_open = new bool[clients.size()];
     for(size_t i=0;i<clients.size();i++)
         client_open[i] = false;
@@ -139,15 +144,19 @@ int main(int, char**)
             ImGui::Begin(clients[i]->get_name().c_str(), &client_open[i]);
 
             const auto& balance = clients[i]->current_balance();
+            const auto& usd_balance = clients[i]->current_balance_usd();
+            double total_balance = 0;
 
             static ImGuiTableFlags flags = ImGuiTableFlags_Borders | ImGuiTableFlags_RowBg;
-            if(ImGui::BeginTable("Balances", 2, flags))
+            if(ImGui::BeginTable("Balances", 3, flags))
             {
                 ImGui::TableNextRow();
                 ImGui::TableNextColumn();
                 ImGui::Text("Asset");
                 ImGui::TableNextColumn();
                 ImGui::Text("Amount");
+                ImGui::TableNextColumn();
+                ImGui::Text("USD");
 
                 for(const auto& it : balance)
                 {
@@ -156,7 +165,17 @@ int main(int, char**)
                     ImGui::Text("%s", it.first.c_str());
                     ImGui::TableNextColumn();
                     ImGui::Text("%f", it.second);
+                    ImGui::TableNextColumn();
+                    ImGui::Text("$%f", usd_balance.at(it.first));
+                    total_balance += usd_balance.at(it.first);
                 }
+                ImGui::TableNextRow();
+                ImGui::TableNextColumn();
+                ImGui::Text("Total");
+                ImGui::TableNextColumn();
+                ImGui::Text("-");
+                ImGui::TableNextColumn();
+                ImGui::Text("$%f", total_balance);
                 ImGui::EndTable();
             }
 

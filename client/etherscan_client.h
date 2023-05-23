@@ -10,15 +10,13 @@ constexpr char ETHERSCAN_BASE_URL[] = "https://api.etherscan.io/api";
 class EtherscanClient : public Client
 {
 public:
-    EtherscanClient(const json& etherscan_json);
+    EtherscanClient(const json& etherscan_json, Price& price);
     
     bool load_balances() noexcept override { 
         if(!_balances)
             _balances = std::make_optional<std::map<std::string, double>>();
         return _calculate_balances_from_transactions();
     }
-
-    double current_balance_usd() noexcept override {return 0;} // No price info yet
 
 private:
     bool _load_transaction_page(const int page) override;

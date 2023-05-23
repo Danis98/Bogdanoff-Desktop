@@ -7,6 +7,8 @@
 
 #include <iostream>
 
+#include "price/price.h"
+
 struct Transaction
 {
     enum class Direction : uint8_t
@@ -25,7 +27,7 @@ struct Transaction
 class Client
 {
 public:
-    Client(const std::string& name);
+    Client(const std::string& name, Price& price);
 
     // Current balance by asset
     const std::map<std::string, double>& current_balance() noexcept
@@ -37,7 +39,7 @@ public:
     virtual bool load_balances() noexcept = 0;
 
     // Current balance in USD
-    virtual double current_balance_usd() noexcept = 0;
+    std::map<std::string, double> current_balance_usd() noexcept;
 
     // Load transactions from venue, handles pagination
     // Returns true on loading success
@@ -54,6 +56,8 @@ protected:
     bool _calculate_balances_from_transactions();
 
     std::string                                  _name;
+    Price&                                       _price;
+
     std::optional<std::map<std::string, double>> _balances;
     std::optional<std::vector<Transaction>>      _transactions;
 };

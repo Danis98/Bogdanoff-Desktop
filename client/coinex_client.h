@@ -10,11 +10,9 @@ constexpr char COINEX_BASE_URL[] = "https://api.coinex.com/v1";
 class CoinexClient : public Client
 {
 public:
-    CoinexClient(const json& coinex_json);
+    CoinexClient(const json& coinex_json, Price& price);
 
     bool load_balances() noexcept override;
-
-    double current_balance_usd() noexcept override {return 0;} // No price info yet
 
 private:
     bool _load_transaction_page(const int page) override;

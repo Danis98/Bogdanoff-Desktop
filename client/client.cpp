@@ -4,9 +4,31 @@
 
 #include <thread>
 
-Client::Client(const std::string& name)
+Client::Client(const std::string& name, Price& price)
     : _name(name)
+    , _price(price)
 {}
+
+
+std::map<std::string, double> Client::current_balance_usd() noexcept
+{
+    if(!_balances)
+        load_balances();
+    
+    std::map<std::string, double> usd_balances;
+    std::vector<std::string> assets;
+    for(auto const& it: *_balances)
+        assets.push_back(it.first);
+    
+    std::map<std::string, double> prices = _price.get_usd_price(assets);
+
+    for(auto const& asset: assets)
+    {
+        usd_balances[asset] = (*_balances)[asset] * prices[asset];
+    }
+
+    return usd_balances;
+}
 
 bool Client::load_transactions() noexcept
 {

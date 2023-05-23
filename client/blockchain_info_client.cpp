@@ -1,7 +1,7 @@
 #include "blockchain_info_client.h"
 
-BlockchainInfoClient::BlockchainInfoClient(const json& blockchain_info_json)
-    : Client("Blockchain.info")
+BlockchainInfoClient::BlockchainInfoClient(const json& blockchain_info_json, Price& price)
+    : Client("Blockchain.info", price)
     , _session(BLOCKCHAIN_INFO_BASE_URL)
 {
     for(const auto& it : blockchain_info_json["addresses"])

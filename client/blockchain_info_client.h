@@ -10,11 +10,9 @@ constexpr char BLOCKCHAIN_INFO_BASE_URL[] = "https://blockchain.info/q";
 class BlockchainInfoClient : public Client
 {
 public:
-    BlockchainInfoClient(const json& blockchain_info_json);
+    BlockchainInfoClient(const json& blockchain_info_json, Price& price);
     
     bool load_balances() noexcept override;
-
-    double current_balance_usd() noexcept override {return 0;} // No price info yet
 
 private:
     bool _load_transaction_page(const int page) override;

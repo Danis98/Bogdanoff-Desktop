@@ -5,3 +5,4 @@ bazel-Bogdanoff
 bazel-out
 bazel-testlogs
 logs
+*.log
