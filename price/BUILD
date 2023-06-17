@@ -11,6 +11,7 @@ cc_library(
         "price.h",
     ],
     deps = [
+        "//chrono:timing",
         "//http",
         "//json",
     ],

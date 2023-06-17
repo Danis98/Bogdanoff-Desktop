@@ -7,14 +7,15 @@
 
 constexpr char COINGECKO_BASE_URL[] = "https://api.coingecko.com/api/v3";
 
-class CoinGeckoPrice : public PriceSource
+class CoinGeckoPriceSource : public PriceSource
 {
 public:
-    CoinGeckoPrice(const json& coingecko_json);
+    CoinGeckoPriceSource(const json& coingecko_json);
 
 protected:
     void _load_asset_ids();
     void _load_prices(const std::vector<std::string>& assets) override;
+    void _load_history(const std::string& asset, uint64_t start, uint64_t end) override;
 
     HttpSession _session;
 

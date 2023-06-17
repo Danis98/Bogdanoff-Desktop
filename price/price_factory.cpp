@@ -8,7 +8,7 @@ void create_price_sources(const json& config_json, std::vector<std::unique_ptr<P
         if(price_config["enabled"].get<std::string>() == "false")
             continue;
         if(price_config["source"] == "coingecko")
-            price_sources.push_back(std::make_unique<CoinGeckoPrice>(price_config));
+            price_sources.push_back(std::make_unique<CoinGeckoPriceSource>(price_config));
         else continue;
     }
 }

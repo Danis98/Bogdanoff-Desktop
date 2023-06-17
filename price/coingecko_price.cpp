@@ -1,14 +1,15 @@
 #include "coingecko_price.h"
+#include "chrono/timing.h"
 
 #include <set>
 
-CoinGeckoPrice::CoinGeckoPrice(const json& coingecko_json)
+CoinGeckoPriceSource::CoinGeckoPriceSource(const json& coingecko_json)
     : PriceSource("coingecko")
     , _session(COINGECKO_BASE_URL)
 {}
 
 
-void CoinGeckoPrice::_load_asset_ids()
+void CoinGeckoPriceSource::_load_asset_ids()
 {
     std::cout << "Loading CoinGecko symbol list" << std::endl;
 
@@ -56,7 +57,7 @@ void CoinGeckoPrice::_load_asset_ids()
     }
 }
 
-void CoinGeckoPrice::_load_prices(const std::vector<std::string>& assets)
+void CoinGeckoPriceSource::_load_prices(const std::vector<std::string>& assets)
 {
     std::cout << "Loading CoinGecko price for ";
     for(const std::string& asset : assets)
@@ -89,5 +90,44 @@ void CoinGeckoPrice::_load_prices(const std::vector<std::string>& assets)
         for(const std::string& asset : assets)
             if((*_asset_ids)[asset] == id)
                 (*_usd_prices)[asset] = it.value()["usd"];
+    }
+}
+
+
+void CoinGeckoPriceSource::_load_history(const std::string& asset, uint64_t start, uint64_t end)
+{
+    std::cout << "Loading CoinGecko price history for " << asset << " in period ["<< start << "," << end << "]" << std::endl;
+
+    if(!_price_history)
+        _price_history = std::make_optional<std::map<std::string, PriceSeries>>();
+
+    if(_price_history->find(asset) == _price_history->end())
+    {
+        _price_history->insert({asset, PriceSeries(asset)});
+    }
+    
+    if(!_asset_ids)
+        _load_asset_ids();
+
+    GetParams params({
+        {"vs_currency", "usd"},
+        {"days", std::to_string((current_time_millis() - start) / SECONDS_IN_DAY)},
+    });
+
+    std::stringstream url_ss;
+    url_ss << "/coins/" << (*_asset_ids)[asset] << "/market_chart";
+
+    bool success = _session.get(url_ss.str(), params.to_string());
+    if(!success)
+        return;
+    const json history = json::parse(_session.read_buffer());
+
+    PriceSeries& series = _price_history->at(asset);
+    for(const auto& it : history["prices"].items())
+    {
+        uint64_t timestamp = it.value()[0];
+        double   price     = it.value()[1];
+        std::cout << timestamp << " " << price << std::endl;
+        series.append(timestamp, price);
     }
 }

@@ -97,6 +97,8 @@ int main(int, char**)
     std::vector<std::unique_ptr<Client>> clients;
     create_clients(config["clients"], clients, price_sources);
 
+    price_sources[0]->get_usd_price_history("BTC", 1671580800000, 1686960000000);
+
     bool *client_open;
     client_open = new bool[clients.size()];
     for(size_t i=0;i<clients.size();i++)
