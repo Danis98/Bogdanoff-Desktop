@@ -4,8 +4,8 @@
 #include <cstdint>
 #include <string>
 
-EtherscanClient::EtherscanClient(const json& etherscan_json, Price& price)
-    : Client("Etherscan", price)
+EtherscanClient::EtherscanClient(const json& etherscan_json, PriceSource& price_source)
+    : Client("Etherscan", price_source)
     , _session(std::string(ETHERSCAN_BASE_URL))
     , _api_token(etherscan_json["token"])
 {

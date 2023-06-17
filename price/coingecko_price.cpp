@@ -3,7 +3,7 @@
 #include <set>
 
 CoinGeckoPrice::CoinGeckoPrice(const json& coingecko_json)
-    : Price("coingecko")
+    : PriceSource("coingecko")
     , _session(COINGECKO_BASE_URL)
 {}
 

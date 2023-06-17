@@ -2,11 +2,11 @@
 
 #include <limits>
 
-Price::Price(const std::string& name)
+PriceSource::PriceSource(const std::string& name)
     : _name(name)
 {}
 
-std::map<std::string, double> Price::get_usd_price(const std::vector<std::string>& assets)
+std::map<std::string, double> PriceSource::get_usd_price(const std::vector<std::string>& assets)
 {
     if(!_usd_prices)
         _load_prices(assets);

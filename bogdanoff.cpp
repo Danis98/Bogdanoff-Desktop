@@ -90,12 +90,12 @@ int main(int, char**)
     const json config = json::parse(config_fstream);
 
     // Initialize prices
-    std::vector<std::unique_ptr<Price>> prices;
-    create_prices(config["prices"], prices);
+    std::vector<std::unique_ptr<PriceSource>> price_sources;
+    create_price_sources(config["price_sources"], price_sources);
 
     // Initialize clients
     std::vector<std::unique_ptr<Client>> clients;
-    create_clients(config["clients"], clients, prices);
+    create_clients(config["clients"], clients, price_sources);
 
     bool *client_open;
     client_open = new bool[clients.size()];

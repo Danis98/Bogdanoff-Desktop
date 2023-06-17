@@ -10,7 +10,7 @@ constexpr char COINEX_BASE_URL[] = "https://api.coinex.com/v1";
 class CoinexClient : public Client
 {
 public:
-    CoinexClient(const json& coinex_json, Price& price);
+    CoinexClient(const json& coinex_json, PriceSource& price_source);
 
     bool load_balances() noexcept override;
 

@@ -7,7 +7,7 @@
 
 constexpr char COINGECKO_BASE_URL[] = "https://api.coingecko.com/api/v3";
 
-class CoinGeckoPrice : public Price
+class CoinGeckoPrice : public PriceSource
 {
 public:
     CoinGeckoPrice(const json& coingecko_json);

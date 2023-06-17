@@ -6,8 +6,8 @@
 #include "chrono/timing.h"
 #include "crypto/md5.h"
 
-CoinexClient::CoinexClient(const json& coinex_json, Price& price)
-    : Client("CoinEx", price)
+CoinexClient::CoinexClient(const json& coinex_json, PriceSource& price_source)
+    : Client("CoinEx", price_source)
     , _session(std::string(COINEX_BASE_URL))
     , _access_id(coinex_json["access_id"])
     , _secret(coinex_json["secret"])

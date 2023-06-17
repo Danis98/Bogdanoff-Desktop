@@ -4,9 +4,9 @@
 
 #include <thread>
 
-Client::Client(const std::string& name, Price& price)
+Client::Client(const std::string& name, PriceSource& price_source)
     : _name(name)
-    , _price(price)
+    , _price_source(price_source)
 {}
 
 
@@ -20,7 +20,7 @@ std::map<std::string, double> Client::current_balance_usd() noexcept
     for(auto const& it: *_balances)
         assets.push_back(it.first);
     
-    std::map<std::string, double> prices = _price.get_usd_price(assets);
+    std::map<std::string, double> prices = _price_source.get_usd_price(assets);
 
     for(auto const& asset: assets)
     {

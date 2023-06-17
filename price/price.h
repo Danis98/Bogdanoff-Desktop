@@ -5,10 +5,10 @@
 #include <string>
 #include <vector>
 
-class Price
+class PriceSource
 {
 public:
-    Price(const std::string& name);
+    PriceSource(const std::string& name);
 
     std::map<std::string, double> get_usd_price(const std::vector<std::string>& asset);
 

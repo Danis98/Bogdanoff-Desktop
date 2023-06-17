@@ -27,7 +27,7 @@ struct Transaction
 class Client
 {
 public:
-    Client(const std::string& name, Price& price);
+    Client(const std::string& name, PriceSource& price_source);
 
     // Current balance by asset
     const std::map<std::string, double>& current_balance() noexcept
@@ -56,7 +56,7 @@ protected:
     bool _calculate_balances_from_transactions();
 
     std::string                                  _name;
-    Price&                                       _price;
+    PriceSource&                                 _price_source;
 
     std::optional<std::map<std::string, double>> _balances;
     std::optional<std::vector<Transaction>>      _transactions;
