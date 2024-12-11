@@ -56,8 +56,8 @@ Supported prices:
 |----|-----------|
 |CoinGecko|CRYPTO|
 
-#### Client
-Clients look up balances and transactions for the specified accounts.
+#### Account Clients
+Account clients look up balances and transactions for the specified accounts.
 Each site/API needs its own client usually
 
 Supported clients:

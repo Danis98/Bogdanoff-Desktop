@@ -1,0 +1,109 @@
+{
+    "ALGO": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "algorand",
+        "asset_class": "CRYPTO"
+    },
+    "APE": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "apecoin-ape",
+        "asset_class": "CRYPTO"
+    },
+    "AVAX": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "avalanche",
+        "asset_class": "CRYPTO"
+    },
+    "BTC": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "bitcoin",
+        "asset_class": "CRYPTO"
+    },
+    "CET": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "coinex-token",
+        "asset_class": "CRYPTO"
+    },
+    "ERG": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "ergo",
+        "asset_class": "CRYPTO"
+    },
+    "ETH": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "ethereum",
+        "asset_class": "CRYPTO"
+    },
+    "ETHW": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "ethereum-pow",
+        "asset_class": "CRYPTO"
+    },
+    "ICP": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "internet-computer",
+        "asset_class": "CRYPTO"
+    },
+    "OPEN": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "qredo",
+        "asset_class": "CRYPTO"
+    },
+    "SAND": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "the-sandbox",
+        "asset_class": "CRYPTO"
+    },
+    "USDT": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "tether",
+        "asset_class": "CRYPTO"
+    },
+    "XRP": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "xrp",
+        "asset_class": "CRYPTO"
+    },
+    "XTZ": {
+        "price_source": "coinmarketcap",
+        "symbol_id": "tezos",
+        "asset_class": "CRYPTO"
+    },
+    "EUR": {
+        "price_source": "ecb",
+        "symbol_id": "EUR",
+        "asset_class": "FX"
+    },
+    "ZEUR": {
+        "price_source": "ecb",
+        "symbol_id": "EUR",
+        "asset_class": "FX"
+    },
+    "USD": {
+        "price_source": "ecb",
+        "symbol_id": "USD",
+        "asset_class": "FX"
+    },
+    "EQQQ": {
+        "price_source": "yahoo_finance_stream",
+        "symbol_id": "EQQQ.MI",
+        "currency": "EUR",
+        "asset_class": "ETF"
+    },
+    "VUSA": {
+        "price_source": "yahoo_finance",
+        "symbol_id": "VUSA.AS",
+        "currency": "EUR",
+        "asset_class": "ETF"
+    },
+    "DIS": {
+        "price_source": "yahoo_finance",
+        "symbol_id": "DIS",
+        "asset_class": "EQUITY"
+    },
+    "PFE": {
+        "price_source": "yahoo_finance",
+        "symbol_id": "PFE",
+        "asset_class": "EQUITY"
+    }
+}

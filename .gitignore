@@ -1,8 +1,6 @@
 settings.json
-imgui.ini
-bazel-bin
-bazel-Bogdanoff
-bazel-out
-bazel-testlogs
 logs
 *.log
+*/__pycache__
+csv_data/
+tmp_data/
