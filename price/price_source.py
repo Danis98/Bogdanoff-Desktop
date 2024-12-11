@@ -29,13 +29,14 @@ class PriceSource:
             else:
                 prices[asset] = self._price_cache[asset][price_date]
 
-        cur_prices_dict = self._get_asset_prices(assets_to_query)
-        prices.update(cur_prices_dict)
+        if len(assets_to_query):
+            cur_prices_dict = self._get_asset_prices(assets_to_query)
+            prices.update(cur_prices_dict)
 
-        with open(self._price_cache_path, 'a') as cache_file:
-            for asset in cur_prices_dict:
-                self._price_cache[asset][price_date] = cur_prices_dict[asset]
-                cache_file.write(f'{price_date},{self._get_price_source_tag()},{asset},{cur_prices_dict[asset]}\n')
+            with open(self._price_cache_path, 'a') as cache_file:
+                for asset in cur_prices_dict:
+                    self._price_cache[asset][price_date] = cur_prices_dict[asset]
+                    cache_file.write(f'{price_date},{self._get_price_source_tag()},{asset},{cur_prices_dict[asset]}\n')
         
         return prices
     

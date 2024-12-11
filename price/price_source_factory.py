@@ -11,8 +11,6 @@ def get_price_source(account_client_config, price_cache_path):
     source = account_client_config['source']
     credentials = account_client_config.get('credentials', {})
 
-    print(source)
-
     if source == 'coin_market_cap':
         return CoinMarketCapPriceSource(price_cache_path, credentials)
     elif source == 'alphavantage':
