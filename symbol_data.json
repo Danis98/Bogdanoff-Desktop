@@ -1,71 +1,71 @@
 {
     "ALGO": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "algorand",
         "asset_class": "CRYPTO"
     },
     "APE": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "apecoin-ape",
         "asset_class": "CRYPTO"
     },
     "AVAX": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "avalanche",
         "asset_class": "CRYPTO"
     },
     "BTC": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "bitcoin",
         "asset_class": "CRYPTO"
     },
     "CET": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "coinex-token",
         "asset_class": "CRYPTO"
     },
     "ERG": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "ergo",
         "asset_class": "CRYPTO"
     },
     "ETH": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "ethereum",
         "asset_class": "CRYPTO"
     },
     "ETHW": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "ethereum-pow",
         "asset_class": "CRYPTO"
     },
     "ICP": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "internet-computer",
         "asset_class": "CRYPTO"
     },
     "OPEN": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "qredo",
         "asset_class": "CRYPTO"
     },
     "SAND": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "the-sandbox",
         "asset_class": "CRYPTO"
     },
     "USDT": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "tether",
         "asset_class": "CRYPTO"
     },
     "XRP": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "xrp",
         "asset_class": "CRYPTO"
     },
     "XTZ": {
-        "price_source": "coinmarketcap",
+        "price_source": "coin_market_cap",
         "symbol_id": "tezos",
         "asset_class": "CRYPTO"
     },

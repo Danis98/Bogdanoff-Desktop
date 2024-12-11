@@ -5,13 +5,16 @@ import struct
 import base64
 from websockets.sync.client import connect
 
+from price.price_source import PriceSource
+
 # Some symbols like EQQQ.MI do not work in the REST API for some reason, and we gotta do this overengineered thing
 # This is slow since Yahoo sometimes just waits forever to send something, especially on non-USEQ symbols
-class YahooFinanceStreamPriceSource:
-    def __init__(self, credentials):
+class YahooFinanceStreamPriceSource(PriceSource):
+    def __init__(self, price_cache_path, credentials):
+        PriceSource.__init__(self, price_cache_path)
         pass
 
-    def get_asset_prices(self, assets):
+    def _get_asset_prices(self, assets):
         prices = {asset: 0 for asset in assets}
         read_assets = set()
         with connect("wss://streamer.finance.yahoo.com/?version=2") as websocket:
@@ -75,3 +78,6 @@ class YahooFinanceStreamPriceSource:
         else:
             price = struct.unpack('f', fields[2])[0]
         return (fields[1].decode(), price)
+    
+    def _get_price_source_tag(self):
+        return 'yahoo_finance_stream'

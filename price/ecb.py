@@ -2,11 +2,14 @@ from io import BytesIO
 import requests
 from zipfile import ZipFile
 
-class ECBPriceSource:
-    def __init__(self, credentials):
+from price.price_source import PriceSource
+
+class ECBPriceSource(PriceSource):
+    def __init__(self, price_cache_path, credentials):
+        PriceSource.__init__(self, price_cache_path)
         self._rates = self._get_latest_rates()
 
-    def get_asset_prices(self, assets):
+    def _get_asset_prices(self, assets):
         prices = {asset: 0 for asset in assets}
         for asset in assets:
             if asset in self._rates:
@@ -37,3 +40,6 @@ class ECBPriceSource:
                 rates[ccy] = eurusd / rates[ccy]
             rates['USD'] = 1.0
         return rates
+    
+    def _get_price_source_tag(self):
+        return 'ecb'

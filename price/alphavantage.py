@@ -1,10 +1,13 @@
 import requests
 
-class AlphaVantagePriceSource:
-    def __init__(self, credentials):
+from price.price_source import PriceSource
+
+class AlphaVantagePriceSource(PriceSource):
+    def __init__(self, price_cache_path, credentials):
+        PriceSource.__init__(self, price_cache_path)
         self._api_key = credentials.get('api_key', '')
 
-    def get_asset_prices(self, assets):
+    def _get_asset_prices(self, assets):
         prices = {asset: 0 for asset in assets}
         for asset in assets:
             request = 'https://www.alphavantage.co/query?function=GLOBAL_QUOTE'
@@ -15,3 +18,6 @@ class AlphaVantagePriceSource:
             if response and 'Global Quote' in response.json():
                 prices[asset] = float(response.json()['Global Quote']['05. price'])
         return prices
+    
+    def _get_price_source_tag(self):
+        return 'alpha_vantage'

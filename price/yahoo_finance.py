@@ -4,11 +4,14 @@ import requests
 import re
 from websockets.sync.client import connect
 
-class YahooFinancePriceSource:
-    def __init__(self, credentials):
+from price.price_source import PriceSource
+
+class YahooFinancePriceSource(PriceSource):
+    def __init__(self, price_cache_path, credentials):
+        PriceSource.__init__(self, price_cache_path)
         pass
 
-    def get_asset_prices(self, assets):
+    def _get_asset_prices(self, assets):
         prices = {asset: 0 for asset in assets}
         for asset in assets:
             print(asset)
@@ -30,3 +33,6 @@ class YahooFinancePriceSource:
                 print(response.content)
 
         return prices
+    
+    def _get_price_source_tag(self):
+        return 'yahoo_finance'

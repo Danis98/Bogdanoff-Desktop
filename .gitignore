@@ -4,3 +4,4 @@ logs
 */__pycache__
 csv_data/
 tmp_data/
+price_cache.csv

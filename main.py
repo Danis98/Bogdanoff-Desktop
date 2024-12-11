@@ -1,5 +1,6 @@
 import argparse
 import json
+from pathlib import Path
 
 from account.account_client_factory import get_account_client
 from price.price_source_factory import get_price_source
@@ -10,6 +11,8 @@ def main(args):
     with open(args.symbol_data_path, "r") as symbol_data_file:
         symbol_data = json.load(symbol_data_file)
 
+    Path(args.price_cache_path).touch(exist_ok=True)
+
     account_clients = []
     for account_client_config in config['account_clients']:
         account_client = get_account_client(account_client_config)
@@ -18,7 +21,7 @@ def main(args):
 
     price_sources = {'constant': None}
     for price_source_config in config['price_sources']:
-        price_source = get_price_source(price_source_config)
+        price_source = get_price_source(price_source_config, args.price_cache_path)
         if price_source is not None:
             price_sources[price_source_config['source']] = price_source
 
@@ -92,20 +95,22 @@ def main(args):
 
     print(f"Total notional: ${total_notional:.02f}")
 
-    print("Share of each asset:")
-    sorted_assets = sorted([(notional_value[k], k) for k in notional_value], reverse=True)
-    for entry in sorted_assets:
-        print(f'{entry[1]:10} ${entry[0]:7.2f}\t{entry[0]/total_notional*100:2.02f}%')
+    if total_notional != 0.0:
+        print("Share of each asset:")
+        sorted_assets = sorted([(notional_value[k], k) for k in notional_value], reverse=True)
+        for entry in sorted_assets:
+            print(f'{entry[1]:10} ${entry[0]:7.2f}\t{entry[0]/total_notional*100:2.02f}%')
 
-    print("Share of each asset class")
-    sorted_asset_classes = sorted([(asset_class_notional[k], k) for k in asset_class_notional], reverse=True)
-    for entry in sorted_asset_classes:
-        print(f'{entry[1]:10} ${entry[0]:7.2f}\t{entry[0]/total_notional*100:2.02f}%')
+        print("Share of each asset class")
+        sorted_asset_classes = sorted([(asset_class_notional[k], k) for k in asset_class_notional], reverse=True)
+        for entry in sorted_asset_classes:
+            print(f'{entry[1]:10} ${entry[0]:7.2f}\t{entry[0]/total_notional*100:2.02f}%')
 
 
 if __name__ == '__main__':
     arg_parser = argparse.ArgumentParser("Bogdanoff arguments")
     arg_parser.add_argument("-c", "--config-path", help="Configuration file", required=True)
     arg_parser.add_argument("-s", "--symbol-data-path", help="Symbol data file", required=True)
+    arg_parser.add_argument("-p", "--price-cache-path", help="Price cache file", required=True)
     args = arg_parser.parse_args()
     main(args)
