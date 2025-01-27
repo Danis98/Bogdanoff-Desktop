@@ -7,40 +7,49 @@ The program expects a `settings.json` file, example below
 
 ```
 {
-    "prices":
+    "price_sources":
     [
         {
-            "source": "coingecko",
-            "enabled": "true"
-        }
+            "source": "coin_market_cap",
+            "credentials":
+            {
+                "api_key": "XXXXXXXXXXXXXXXX"
+            }
+        },
+        {
+            "source": "ecb"
+        },
     ],
-    "clients":
+    "account_clients":
     [
         {
             "venue": "coinex",
-            "enabled": "true",
-            "price": "coingecko",
-            "access_id": "[ACCESS_ID]",
-            "secret": "[SECRET]"
+            "credentials":
+            {
+                "access_id": "XXXXXXXXXXXXXX",
+                "secret": "XXXXXXXXXXXXXXXXX"
+            }
         },
         {
             "venue": "etherscan",
-            "enabled": "true",
-            "price": "coingecko",
-            "token": "[TOKEN]",
-            "addresses":
-            [
-                "[ADDRESS]"
-            ]
+            "credentials":{
+                "token": "XXXXXXXXXXXXXX",
+                "addresses":
+                [
+                    "XXXXXXXXXXXXXXXXXXXXXX"
+                ],
+                "spam_filter":
+                [
+                    "SOME SPAM TOKEN NAME"
+                ]
+            }
         },
         {
-            "venue": "blockchain_info",
-            "enabled": "true",
-            "price": "coingecko",
-            "addresses":
-            [
-                "[ADDRESS]"
-            ]
+            "venue": "interactive_brokers",
+            "credentials":
+            {
+                "csv_path": "PATH_TO_TRADES_CSV"
+            }
         }
     ]
 }
@@ -54,7 +63,10 @@ Price components are an interface for querying a website/API about asset prices
 Supported prices:
 |Name|Asset Class|
 |----|-----------|
-|CoinGecko|CRYPTO|
+|AlphaVantage|EQUITY|
+|CoinMarketCap|CRYPTO|
+|ECB|FX|
+|Yahoo Finance|EQUITY|
 
 #### Account Clients
 Account clients look up balances and transactions for the specified accounts.
@@ -63,6 +75,9 @@ Each site/API needs its own client usually
 Supported clients:
 |Name|Asset Class|
 |----|-----------|
+|Bitvavo|CRYPTO|
+|Blockchain.info|CRYPTO|
 |CoinEx|CRYPTO|
 |Etherscan|CRYPTO|
-|Blockchain.info|CRYPTO|
+|Interactive Brokers|EQUITY|
+|Kraken|CRYPTO|
