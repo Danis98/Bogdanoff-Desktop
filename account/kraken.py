@@ -9,6 +9,11 @@ class KrakenAccountClient:
         self._api_key = credentials.get('api_key', '')
         self._api_secret = credentials.get('secret', '')
 
+    KRAKEN_NAME_TO_CANONICAL_NAME = {
+        'ZEUR': 'EUR',
+        'XXBT': 'BTC',
+    }
+
     def get_assets(self):
         balances = {}
         query = 'https://api.kraken.com/0/private/Balance'
@@ -26,7 +31,7 @@ class KrakenAccountClient:
                 balance = float(result.json()['result'][symbol])
                 if balance == 0:
                     continue
-                balances[symbol] = balance
+                balances[self.KRAKEN_NAME_TO_CANONICAL_NAME.get(symbol, symbol)] = balance
         return balances
 
     def get_account_id(self):
