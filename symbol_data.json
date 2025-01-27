@@ -85,8 +85,8 @@
         "asset_class": "FX"
     },
     "EQQQ": {
-        "price_source": "yahoo_finance_stream",
-        "symbol_id": "EQQQ.MI",
+        "price_source": "alpha_vantage",
+        "symbol_id": "EQQQ.PAR",
         "currency": "EUR",
         "asset_class": "ETF"
     },

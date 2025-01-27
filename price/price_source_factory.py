@@ -13,7 +13,7 @@ def get_price_source(account_client_config, price_cache_path):
 
     if source == 'coin_market_cap':
         return CoinMarketCapPriceSource(price_cache_path, credentials)
-    elif source == 'alphavantage':
+    elif source == 'alpha_vantage':
         return AlphaVantagePriceSource(price_cache_path, credentials)
     elif source == 'ecb':
         return ECBPriceSource(price_cache_path, credentials)
